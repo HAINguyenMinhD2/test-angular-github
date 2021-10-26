@@ -1,0 +1,52 @@
+import { Component, OnInit } from '@angular/core';
+import { TutorialService } from 'src/app/services/tutorial.service';
+
+@Component({
+  selector: 'app-add-tutorial',
+  templateUrl: './add-tutorial.component.html',
+  styleUrls: ['./add-tutorial.component.css'],
+})
+export class AddTutorialComponent implements OnInit {
+  tutorial = {
+    title: '',
+    description: '',
+    published: null,
+    type: 'beginner',
+  };
+  submitted = false;
+
+  constructor(private tutorialService: TutorialService) {}
+
+  ngOnInit(): void {}
+
+  saveTutorial(): void {
+    console.log(this.tutorial);
+
+    const data = {
+      title: this.tutorial.title,
+      description: this.tutorial.description,
+      published: this.tutorial.published,
+      type: this.tutorial.type,
+    };
+
+    this.tutorialService.create(data).subscribe(
+      (response) => {
+        console.log(response);
+        this.submitted = true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  newTutorial(): void {
+    this.submitted = false;
+    this.tutorial = {
+      title: '',
+      description: '',
+      published: null,
+      type: 'beginner',
+    };
+  }
+}

@@ -1,0 +1,51 @@
+<div style="width: 400px; margin: auto;">
+    <div *ngIf="currentTutorial" class="edit-form">
+        <h4>Tutorial</h4>
+        <form>
+            <div class="form-group mt-2">
+                <label for="title">題名</label>
+                <input type="text" class="form-control" id="title" [(ngModel)]="currentTutorial.title" name="title" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="description">説明</label>
+                <input type="text" class="form-control" id="description" [(ngModel)]="currentTutorial.description"
+                    name="description" />
+            </div>
+            <div class="form-group mt-2">
+                <label class="form-check-label" for="type">タイプ</label>
+                <select class="form-select" name="type" aria-label="Type" required [(ngModel)]="currentTutorial.type">
+                    <option value="beginner" selected>初心者</option>
+                    <option value="advance">前進</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><strong>状態:</strong></label>
+                {{ currentTutorial.published ? "公開済み" : "保留中" }}
+            </div>
+        </form>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-primary mr-2" *ngIf="currentTutorial.published" (click)="updatePublished(false)">
+                非公開
+            </button>
+            <button *ngIf="!currentTutorial.published" class="btn btn-primary mr-2" (click)="updatePublished(true)">
+                公開
+            </button>
+
+            <button class="btn btn-danger mr-2" (click)="deleteTutorial()">
+                消去
+            </button>
+            
+            <button type="submit" class="btn btn-success" (click)="updateTutorial()">
+                アップデート
+            </button>
+        </div>
+        <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="!currentTutorial">
+        <br />
+        <p>このチュートリアルにアクセスできません...</p>
+    </div>
+</div>

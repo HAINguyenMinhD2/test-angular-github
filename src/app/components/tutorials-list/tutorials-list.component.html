@@ -1,0 +1,55 @@
+<div class="list row">
+    <div class="col-md-8">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="タイトルで検索" [(ngModel)]="title" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="searchTitle()">
+                    検索
+                </button>
+                &nbsp;
+                <button class="btn btn-outline-primary" type="button">
+                    検索
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>チュートリアルリスト</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let tutorial of tutorials; let i = index"
+                [class.active]="i == currentIndex" (click)="setActiveTutorial(tutorial, i)">
+                {{ tutorial.title }}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="currentTutorial">
+            <h4>チュートリアル</h4>
+            <div>
+                <label><strong>題名:</strong></label> {{ currentTutorial.title }}
+            </div>
+            <div>
+                <label><strong>説明:</strong></label>
+                {{ currentTutorial.description }}
+            </div>
+            <div>
+                <label><strong>状態:</strong></label>
+                {{ currentTutorial.published ? "公開" : "保留中" }}
+            </div>
+            <div>
+                <label><strong>タイプ:</strong></label>
+                {{ currentTutorial.type }}
+            </div>
+
+            <h5 *ngIf="currentTutorial.id !== ''">
+                <a 
+                    class="badge bg-warning" 
+                    routerLink="/{{ currentTutorial.id }}" 
+                    [ngStyle]="style" (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)"
+                >
+                    編集
+                </a>
+            </h5>
+        </div>
+    </div>
+</div>
