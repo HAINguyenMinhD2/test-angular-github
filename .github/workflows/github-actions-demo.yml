@@ -5,12 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v1.0.0
       - name: Install
         run: yarn
       - name: Percy Test
         uses: percy/exec-action@v0.3.1
         with:
-          command: "percy exec -- npm run test"
+          command: "cypress run"
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
