@@ -1,0 +1,4 @@
+- name: First example
+  url: http://localhost:7749
+- name: Second example
+  url: http://localhost:7749/add
