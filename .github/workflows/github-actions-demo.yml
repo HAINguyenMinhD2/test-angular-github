@@ -7,7 +7,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1.0.0
       - name: Install
-        run: yarn
+        run: npm
       - name: Percy Test
         uses: percy/storybook-action@v0.1.2
         env:
