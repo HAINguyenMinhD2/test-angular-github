@@ -9,7 +9,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Run
-        run: ng serve
+        run: npm run start
       - name: Percy Test
         uses: percy/exec-action@v0.3.1
         with:
