@@ -1,7 +1,7 @@
 name: CI
 on: [push, pull_request]
 jobs:
-  default:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -9,8 +9,10 @@ jobs:
       - name: Install
         run: npm install
       - name: Run
-        run: npm run start
+        run: ng serve
       - name: Percy Test
-        uses: percy/storybook-action@v0.1.2
+        uses: percy/exec-action@v0.3.1
+        with:
+          command: "cypress run"
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
